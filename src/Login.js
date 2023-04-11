@@ -1,9 +1,11 @@
 import { useState } from "react";
+import {useCookies} from "react-cookie";
 
 function Login(props)
 {
     const [data, setData]=useState(Array(3).fill(false));
     const [disp, setDisp] =useState("");
+    const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser'])
 
     const handleChange=(event)=>
     {
@@ -46,9 +48,13 @@ function Login(props)
                     {
                         setDisp("password or email is incorrect");
                     }
-                     if(res.status===204)
+                     if(res.status===200)
                      {
-                        setDisp("Account found succesfully!!! please verify your email address");
+                        res.json().then(function(res)
+                        {
+                            console.log(res);
+                            setCookie("enquiryUser",res.token, {path: '/'});
+                        })
                      }
                 })
         }
