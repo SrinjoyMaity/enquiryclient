@@ -68,7 +68,7 @@ function Register(props)
                     }
                      if(res.status==204)
                      {
-                        setDisp("Account created succesfully!!!");
+                        setDisp("Account created succesfully!!! please verify your email address");
                      }
                 })
         }
@@ -85,6 +85,7 @@ function Register(props)
             <label> Date of Birth:<input type="date" id="5" onChange= {handleChange}/></label>
             <label> Password<input type="text"  id="6" onChange= {handleChange}/></label>
             <input type="submit"  value="Sign Up" />
+            <button> log in</button>
         </form>
         <h4>{disp}</h4>
         </div>
