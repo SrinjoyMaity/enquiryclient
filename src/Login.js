@@ -1,11 +1,13 @@
 import { useState } from "react";
 import {useCookies} from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 function Login(props)
 {
     const [data, setData]=useState(Array(3).fill(false));
     const [disp, setDisp] =useState("");
-    const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser'])
+    const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
+    const navigate=useNavigate();
 
     const handleChange=(event)=>
     {
@@ -54,10 +56,16 @@ function Login(props)
                         {
                             console.log(res);
                             setCookie("enquiryUser",res.token, {path: '/'});
+                            setDisp("Account found");
                         })
                      }
                 })
         }
+        event.preventDefault();
+    }
+    function handleClick(event)
+    {
+        navigate("/register");
         event.preventDefault();
     }
     return (
@@ -67,7 +75,7 @@ function Login(props)
             <label> E-mail:<input type="text" id="1" onChange= {handleChange}/></label>
             <label> Password<input type="text"  id="2" onChange= {handleChange}/></label>
             <input type="submit"  value="log in" />
-            <button> Register</button>
+            <button onClick={handleClick}> Register</button>
         </form>
         <h4>{disp}</h4>
         </div>

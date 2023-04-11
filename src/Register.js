@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register(props)
 {
     const [data, setData]=useState(Array(8).fill(false));
     const [disp, setDisp] =useState("");
+    const navigate=useNavigate();
    
     const handleChange=(event)=>
     {
@@ -82,6 +84,11 @@ function Register(props)
         }
         event.preventDefault();
     }
+    function handleClick(event)
+    {
+        navigate("/");
+        event.preventDefault();
+    }
     return (
         <div>
         <form onSubmit= {handleSubmit}>
@@ -94,7 +101,7 @@ function Register(props)
             <label> Password<input type="text"  id="6" onChange= {handleChange}/></label>
             <label> Confirm password<input type="text"  id="7" onChange= {handleChange}/></label>
             <input type="submit"  value="Sign Up" />
-            <button> log in</button>
+            <button onClick={handleClick}> log in</button>
         </form>
         <h4>{disp}</h4>
         </div>
