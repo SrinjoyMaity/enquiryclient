@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function Register(props)
 {
-    const [data, setData]=useState(Array(7).fill(false));
+    const [data, setData]=useState(Array(8).fill(false));
     const [disp, setDisp] =useState("");
    
     const handleChange=(event)=>
@@ -37,6 +37,14 @@ function Register(props)
         {
             setDisp("Password is missing, Provide necessary detail or rewrite it to resolve this");
         }
+        else if(data[7]==false)
+        {
+            setDisp("confirm your password");
+        }
+        else if(data[6]!==data[7])
+        {
+            setDisp("passwords don't match, please rewrite the passwords");
+        }
         else
         {
             let output={
@@ -58,15 +66,15 @@ function Register(props)
                     body: JSON.stringify(output)
                 })
                 .then(function(res){
-                    if(res.status==504)
+                    if(res.status===504)
                     {
                         setDisp("something went wrong in the server");
                     }
-                     if(res.status==406)
+                     if(res.status===406)
                     {
                         setDisp("The roll number or email already exists");
                     }
-                     if(res.status==204)
+                     if(res.status===204)
                      {
                         setDisp("Account created succesfully!!! please verify your email address");
                      }
@@ -84,6 +92,7 @@ function Register(props)
             <label> Roll number:<input type="text" id="4" onChange= {handleChange}/></label>
             <label> Date of Birth:<input type="date" id="5" onChange= {handleChange}/></label>
             <label> Password<input type="text"  id="6" onChange= {handleChange}/></label>
+            <label> Confirm password<input type="text"  id="7" onChange= {handleChange}/></label>
             <input type="submit"  value="Sign Up" />
             <button> log in</button>
         </form>
