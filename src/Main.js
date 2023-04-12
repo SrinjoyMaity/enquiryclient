@@ -34,6 +34,11 @@ function Main(props)
                             setDispRoll(res.roll);
                         })
                     }
+                    else 
+                    {
+                        removeCookie("enquiryUser");
+                        navigate("/");
+                    }
                 })
         }
     }
