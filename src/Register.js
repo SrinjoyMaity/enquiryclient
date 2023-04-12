@@ -98,8 +98,8 @@ function Register(props)
             <label> E-mail:<input type="text" id="3" onChange= {handleChange}/></label>
             <label> Roll number:<input type="text" id="4" onChange= {handleChange}/></label>
             <label> Date of Birth:<input type="date" id="5" onChange= {handleChange}/></label>
-            <label> Password<input type="text"  id="6" onChange= {handleChange}/></label>
-            <label> Confirm password<input type="text"  id="7" onChange= {handleChange}/></label>
+            <label> Password<input type="password"  id="6" onChange= {handleChange}/></label>
+            <label> Confirm password<input type="password"  id="7" onChange= {handleChange}/></label>
             <input type="submit"  value="Sign Up" />
             <button onClick={handleClick}> log in</button>
         </form>

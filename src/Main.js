@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 function Main(props)
 {
     const [data, setData]=useState(Array(3).fill(false));
-    const [disp, setDisp] =useState("");
+    const [dispName, setDispName] =useState("");
+    const [dispRoll, setDispRoll] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
     const navigate=useNavigate();
 
@@ -29,6 +30,8 @@ function Main(props)
                     {
                         res.json().then(function(res){
                             console.log(res);
+                            setDispName(res.firstname+" "+res.lastname);
+                            setDispRoll(res.roll);
                         })
                     }
                 })
@@ -48,6 +51,8 @@ function Main(props)
     return (
         <div>
             <div>
+            <h1>{dispName}</h1>
+            <h4>{dispRoll}</h4>
             <button>edit account details</button>
                 <button onClick={handlelogout}>log out</button>
                 <button>deactivate</button>
@@ -56,7 +61,6 @@ function Main(props)
                 <button>Cab-pool dashboard</button>
                 <button>lost/found enquiry dashboard</button>
             </div>
-            <h1>account is here</h1>
         </div>
         
     )
