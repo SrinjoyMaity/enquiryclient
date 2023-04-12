@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {useCookies} from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 function Login(props)
 {
+    
+
     const [data, setData]=useState(Array(3).fill(false));
     const [disp, setDisp] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
     const navigate=useNavigate();
+
+    useEffect(()=>{
+        if(cookies.enquiryUser!== undefined)
+        {
+            console.log(cookies.enquiryUser);
+                navigate("/main");
+        }
+})
 
     const handleChange=(event)=>
     {
@@ -42,9 +52,9 @@ function Login(props)
                     body: JSON.stringify(output)
                 })
                 .then(function(res){
-                    if(res.status===504)
+                    if(res.status===503)
                     {
-                        setDisp("something went wrong in the server");
+                        setDisp("the email or password you provided might not be in the server, or the server is currently unavailable");
                     }
                      if(res.status===406)
                     {
@@ -54,7 +64,7 @@ function Login(props)
                      {
                         res.json().then(function(res)
                         {
-                            console.log(res);
+                            console.log(cookies.enquiryUser);
                             setCookie("enquiryUser",res.token, {path: '/'});
                             setDisp("Account found");
                         })
@@ -68,6 +78,13 @@ function Login(props)
         navigate("/register");
         event.preventDefault();
     }
+    
+    if(cookies.enquiryUser!== undefined)
+    {
+        console.log(cookies.enquiryUser);
+            navigate("/main");
+    }
+
     return (
         <div>
         <form onSubmit= {handleSubmit}>

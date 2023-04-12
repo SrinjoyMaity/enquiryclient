@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
-import App from './App';
-import Register from './Register.js'
-import Login from './Login.js'
+import Register from './Register.js';
+import Login from './Login.js';
+import Main from './Main.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +12,7 @@ root.render(
             <Routes>
             <Route path="/" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/main" element={<Main/>}/>
             </Routes>
     </BrowserRouter>
 );
