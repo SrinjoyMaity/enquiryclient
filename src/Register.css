@@ -1,0 +1,115 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+#root, .page
+{
+    height:100%;
+    width:100%;
+    background-color: white;
+}
+#blackbar
+{
+    position: absolute;
+    right:2%;
+    bottom: 8%;
+    width: 65%;
+    height: 7%;
+    background-color: black;
+}
+#logo
+{
+    position: absolute;
+    right:31%;
+    bottom: 5.5%;
+    width: 7%;
+    height: 12%;
+}
+#background
+{
+    position: absolute;
+    right:0%;
+    bottom: 0%;
+    width: 100%;
+    height: 100%; 
+    z-index: 0;
+}
+.login 
+{
+    position: absolute;
+    width:30%;
+    height:100%;
+    background-color: rgb(246, 245, 252);
+    z-index: 1;
+}
+form
+{
+    position: absolute;
+    width:100%;
+    height:100%;
+    background-color: rgb(246, 245, 252);
+    z-index: 1;
+}
+.form{
+    position:relative;
+    left:5%;
+    width:100%;
+    height:10%;
+}
+label{
+    display:block;
+    color: rgb(36, 25, 8);
+    font-size:x-large;
+    font-family: sans-serif;
+}
+input{
+    
+    color: rgb(36, 25, 8);
+    display: block;
+    height:85%;
+    width: 83%;
+    font-size:x-large;
+    font-family: sans-serif;
+}
+h1{
+    position:absolute;
+    top:10%;
+    left:15%;
+    color:rgb(49, 22, 100);
+    font-size: xx-large;
+    margin:5px;
+    z-index: 3;
+    font-family: sans-serif;
+}
+h4{
+    position:absolute;
+    bottom:5%;
+    left:5%;
+    color:rgb(107, 16, 16);
+    font-size: larger;
+    margin:5px;
+    z-index: 3;
+    font-family: sans-serif;
+}
+button{
+    height:100%;
+    height:60%;
+    width: 40%;
+    margin: 5px;
+    background-color: blue;
+    font-size: larger;
+    color: white;
+    font-family: sans-serif;
+}
+.submit{
+    display: inline;
+    height:60%;
+    width: 40%;
+    margin: 5px;
+    background-color: blue;
+    font-size: larger;
+    color: white;
+    font-family: sans-serif;
+}

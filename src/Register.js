@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './Register.css';
+import logo from './images/enquirylogo.png';
+import bg from './images/background.png';
 
 function Register(props)
 {
@@ -90,21 +93,28 @@ function Register(props)
         event.preventDefault();
     }
     return (
-        <div>
+        <div className="page">
+         <img src={bg} id="background" alt="background"/>
+        <div className="login">
         <form onSubmit= {handleSubmit}>
-            <h1>Create Account</h1>
-            <label> First Name: <input type="text" id="1" onChange= {handleChange}/></label>
-            <label>Last Name: <input type="text" id="2" onChange= {handleChange}/></label>
-            <label> E-mail:<input type="text" id="3" onChange= {handleChange}/></label>
-            <label> Roll number:<input type="text" id="4" onChange= {handleChange}/></label>
-            <label> Date of Birth:<input type="date" id="5" onChange= {handleChange}/></label>
-            <label> Password<input type="password"  id="6" onChange= {handleChange}/></label>
-            <label> Confirm password<input type="password"  id="7" onChange= {handleChange}/></label>
-            <input type="submit"  value="Sign Up" />
-            <button onClick={handleClick}> log in</button>
+            <div className="form"><h1>Create Account:</h1></div>
+            <div className="form"><label> First Name: <input type="text" id="1" onChange= {handleChange}/></label></div>
+            <div className="form"><label>Last Name: <input type="text" id="2" onChange= {handleChange}/></label></div>
+            <div className="form"><label> E-mail:<input type="text" id="3" onChange= {handleChange}/></label></div>
+            <div className="form"><label> Roll number:<input type="text" id="4" onChange= {handleChange}/></label></div>
+            <div className="form"><label> Date of Birth:<input type="date" id="5" onChange= {handleChange}/></label></div>
+            <div className="form"><label> Password:<input type="password"  id="6" onChange= {handleChange}/></label></div>
+            <div className="form"><label> Confirm password:<input type="password"  id="7" onChange= {handleChange}/></label></div>
+            <div className="form"><input className="submit" type="submit"  value="Sign Up" />
+            <button onClick={handleClick}> log in</button></div>
         </form>
         <h4>{disp}</h4>
         </div>
+        <div id="blackbar"></div>
+        <img src={logo} id="logo" alt="logo"/>
+       
+        </div>
+        
     )
 }
 export default Register;
