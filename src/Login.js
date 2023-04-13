@@ -3,7 +3,7 @@ import {useCookies} from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import './login.css';
 import logo from './images/enquirylogo.png';
-import bg from './images/background.png';
+import bg from './images/background.jpg';
 
 
 function Login(props)

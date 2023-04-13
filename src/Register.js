@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Register.css';
 import logo from './images/enquirylogo.png';
-import bg from './images/background.png';
+import bg from './images/background.jpg';
 
 function Register(props)
 {
@@ -111,6 +111,7 @@ function Register(props)
         <h4 className="registerdisplay">{disp}</h4>
         </div>
         <div id="blackbar"></div>
+        <h1 className="caption">Campus life made easier!</h1>
         <img src={logo} id="logo" alt="logo"/>
        
         </div>
