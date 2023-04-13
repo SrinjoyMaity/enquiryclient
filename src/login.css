@@ -1,0 +1,10 @@
+
+#log
+{
+    position: absolute;
+    width:30%;
+    height:100%;
+    left:35%;
+    background-color: rgb(246, 245, 252);
+    z-index: 1;
+}

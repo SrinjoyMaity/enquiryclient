@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import {useCookies} from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import './login.css';
+import logo from './images/enquirylogo.png';
+import bg from './images/background.png';
+
 
 function Login(props)
 {
@@ -87,12 +91,14 @@ function Login(props)
 
     return (
         <div>
-        <form onSubmit= {handleSubmit}>
-            <h1>Log in</h1>
-            <label> E-mail:<input type="text" id="1" onChange= {handleChange}/></label>
-            <label> Password<input type="text"  id="2" onChange= {handleChange}/></label>
-            <input type="submit"  value="log in" />
-            <button onClick={handleClick}> Register</button>
+         <img src={bg} id="background" alt="background"/>
+         <img src={logo} id="logo2" alt="logo"/>
+        <form id="log" onSubmit= {handleSubmit}>
+            <h1>Sign in</h1>
+            <div><label> E-mail:<input type="text" id="1" onChange= {handleChange}/></label></div>
+            <div><label> Password<input type="text"  id="2" onChange= {handleChange}/></label></div>
+            <div><input type="submit"  value="log in" />
+            <button onClick={handleClick}> Register</button></div>
         </form>
         <h4>{disp}</h4>
         </div>

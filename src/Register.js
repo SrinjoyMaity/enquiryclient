@@ -95,20 +95,20 @@ function Register(props)
     return (
         <div className="page">
          <img src={bg} id="background" alt="background"/>
-        <div className="login">
-        <form onSubmit= {handleSubmit}>
-            <div className="form"><h1>Create Account:</h1></div>
-            <div className="form"><label> First Name: <input type="text" id="1" onChange= {handleChange}/></label></div>
-            <div className="form"><label>Last Name: <input type="text" id="2" onChange= {handleChange}/></label></div>
-            <div className="form"><label> E-mail:<input type="text" id="3" onChange= {handleChange}/></label></div>
-            <div className="form"><label> Roll number:<input type="text" id="4" onChange= {handleChange}/></label></div>
-            <div className="form"><label> Date of Birth:<input type="date" id="5" onChange= {handleChange}/></label></div>
-            <div className="form"><label> Password:<input type="password"  id="6" onChange= {handleChange}/></label></div>
-            <div className="form"><label> Confirm password:<input type="password"  id="7" onChange= {handleChange}/></label></div>
+        <div className="register">
+        <form className="registerform" onSubmit= {handleSubmit}>
+            <div className="form"><h1 className="createAccount">Create Account:</h1></div>
+            <div className="form"><label className="registerlabel"> First Name: <input className="registerinput" type="text" id="1" onChange= {handleChange}/></label></div>
+            <div className="form"><label className="registerlabel">Last Name: <input className="registerinput" type="text" id="2" onChange= {handleChange}/></label></div>
+            <div className="form"><label className="registerlabel"> E-mail:<input className="registerinput" type="text" id="3" onChange= {handleChange}/></label></div>
+            <div className="form"><label className="registerlabel"> Roll number:<input className="registerinput" type="text" id="4" onChange= {handleChange}/></label></div>
+            <div className="form"><label className="registerlabel"> Date of Birth:<input className="registerinput" type="date" id="5" onChange= {handleChange}/></label></div>
+            <div className="form"><label className="registerlabel"> Password:<input className="registerinput" type="password"  id="6" onChange= {handleChange}/></label></div>
+            <div className="form"><label className="registerlabel"> Confirm password:<input className="registerinput" type="password"  id="7" onChange= {handleChange}/></label></div>
             <div className="form"><input className="submit" type="submit"  value="Sign Up" />
-            <button onClick={handleClick}> log in</button></div>
+            <button className="registerbutton" onClick={handleClick}> log in</button></div>
         </form>
-        <h4>{disp}</h4>
+        <h4 className="registerdisplay">{disp}</h4>
         </div>
         <div id="blackbar"></div>
         <img src={logo} id="logo" alt="logo"/>
