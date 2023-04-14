@@ -1,15 +1,18 @@
 import { useState , useEffect } from "react";
 import {useCookies} from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import pp from "./images/profilepic.jpg";
+import './main.css';
 
 function Main(props)
 {
-    const [data, setData]=useState(Array(3).fill(false));
+    const [img, setImg]=useState();
+    const[ accdata,setAccdata]=useState();
     const [dispName, setDispName] =useState("");
-    const [dispRoll, setDispRoll] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
     const navigate=useNavigate();
 
+    var data;
     useEffect(()=>{
         if(cookies.enquiryUser=== undefined)
         {
@@ -30,8 +33,25 @@ function Main(props)
                     {
                         res.json().then(function(res){
                             console.log(res);
-                            setDispName(res.firstname+" "+res.lastname);
-                            setDispRoll(res.roll);
+                            data=res;
+                            setDispName(res.firstname+" "+res.lastname+" "+res.roll);
+                            if(res.dp===null)
+                            {
+                                setImg(pp);
+                            }
+                            else
+                            {
+                                setImg(res.dp);
+                            }
+                            if(res.type!=="admin")
+                            {
+                                document.getElementById("admin").disabled=true;
+                                document.getElementById("admin").style="visibility:hidden;";
+                            }
+                            else
+                            {
+                                document.getElementById("admin").disabled=false;
+                            }
                         })
                     }
                     else 
@@ -43,7 +63,6 @@ function Main(props)
         }
     }
     );
-
     function handlelogout(props)
     {
         removeCookie("enquiryUser");
@@ -54,18 +73,20 @@ function Main(props)
             navigate("/");
     }
     return (
-        <div>
-            <div>
-            <h1>{dispName}</h1>
-            <h4>{dispRoll}</h4>
-            <button>edit account details</button>
-                <button onClick={handlelogout}>log out</button>
-                <button>deactivate</button>
+        <div className="mainpage">
+            <div className="topbar">
+            <img src={img} className="profilepic" alt="profilepic" />
+            <h1 className="displayname">{dispName}</h1>
+            <button className = "accedit">Edit</button>
+                <button className="logout" onClick={handlelogout}>log out</button>
+                <button className="deactivate">deactivate</button>
+                <button id="admin" onClick={handlelogout}>admin</button>
             </div>
-            <div>
-                <button>Cab-pool dashboard</button>
-                <button>lost/found enquiry dashboard</button>
+            <div className="midbar">
+                <button className="cabpool">Cab-pool dashboard</button>
+                <button className="lostfound">lost/found enquiry dashboard</button>
             </div>
+            <div className="lowbar"></div>
         </div>
         
     )
