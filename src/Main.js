@@ -16,6 +16,8 @@ import './main.css';
     const navigate=useNavigate();
 
     useEffect(()=>{
+        document.getElementById("admin").disabled=true;
+        document.getElementById("admin").style="visibility:hidden;";
         if(cookies.enquiryUser=== undefined)
         {
                 navigate("/");
@@ -56,6 +58,7 @@ import './main.css';
                             else
                             {
                                 document.getElementById("admin").disabled=false;
+                                document.getElementById("admin").style="visibility:visible;";
                             }
                         })
                     }

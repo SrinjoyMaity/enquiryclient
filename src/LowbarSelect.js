@@ -1,6 +1,7 @@
 import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Editdetail from "./Editdetail.js";
+import Deactivate from "./Deactivate.js";
 
 
 function LowbarSelect(props)
@@ -28,7 +29,7 @@ function LowbarSelect(props)
     }
     else if(props.sel===5)
     {
-        return <h1>This page is deactivate window</h1>
+        return <Deactivate info={props.info}/>
     }
     else
     {

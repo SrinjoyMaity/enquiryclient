@@ -2,7 +2,6 @@ import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './Editdetail.css';
 import pp from "./images/profilepic.jpg";
-import { toASCII } from "punycode";
 
 
 function Editdetail(props)
