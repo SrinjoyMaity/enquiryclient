@@ -1,4 +1,5 @@
 import { useState , useEffect } from "react";
+import {Buffer} from 'buffer';
 import {useCookies} from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import pp from "./images/profilepic.jpg";
@@ -11,7 +12,7 @@ import './main.css';
     const[ lowbar,setLowbar]=useState(0);
     const [dispName, setDispName] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
-    const [id, setId]=useState();
+    const [info, setInfo]=useState();
     const navigate=useNavigate();
 
     useEffect(()=>{
@@ -35,14 +36,17 @@ import './main.css';
                         res.json().then(function(res){
                             console.log(res);
                             setDispName(res.firstname+" "+res.lastname+" "+res.roll);
-                            setId(res._id);
+                            setInfo(res._id);
                             if(res.dp===null)
                             {
                                 setImg(pp);
                             }
                             else
                             {
-                                setImg(res.dp);
+                                const image=Buffer.from(res.dp).toString();
+                                console.log(image);
+                                setImg(image);
+                                console.log(img);
                             }
                             if(res.type!=="admin")
                             {
@@ -108,7 +112,7 @@ import './main.css';
                 <button className="lostfound" onClick={handleLostfound}>lost/found enquiry dashboard</button>
             </div>
             <div className="lowbar">
-               <LowbarSelect sel={lowbar}/>
+               <LowbarSelect sel={lowbar} info={info} pp={img}/>
             </div>
         </div> 
     )

@@ -67,8 +67,9 @@
 }
 .form{
     position:relative;
+    display: block;
     left:5%;
-    width:100%;
+    width:95%;
     height:10%;
 }
 .registerlabel{

@@ -1,5 +1,6 @@
 import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Editdetail from "./Editdetail.js";
 
 
 function LowbarSelect(props)
@@ -11,7 +12,7 @@ function LowbarSelect(props)
     }
     else if(props.sel===1)
     {
-        return <h1>This page is to edit your profile</h1>
+        return <Editdetail info={props.info} img={props.pp}/>
     }
     else if(props.sel===2)
     {
