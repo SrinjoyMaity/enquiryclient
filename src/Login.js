@@ -95,7 +95,7 @@ function Login(props)
         <form id="login" onSubmit= {handleSubmit}>
          <div className="logodiv"><img src={logo} id="logo2" alt="logo"/></div>
             <div className="logdiv"><label className="loglabel"> Enter email:<input className="inputlog" type="text" id="1" onChange= {handleChange}/></label></div>
-            <div className="logdiv"><label className="loglabel"> Enter password:<input className="inputlog" type="text"  id="2" onChange= {handleChange}/></label></div>
+            <div className="logdiv"><label className="loglabel"> Enter password:<input className="inputlog" type="password"  id="2" onChange= {handleChange}/></label></div>
             <div className="logdiv"><input className="submitlog" type="submit"  value="log in" />
             <button className="loginbutton" onClick={handleClick}> Register</button></div>
             <div className="logdiv"><button className="passReset"> Forgot password?</button></div>

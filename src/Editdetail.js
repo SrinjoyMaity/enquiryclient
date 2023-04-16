@@ -18,7 +18,6 @@ function Editdetail(props)
         let update= data;
         update[parseInt(event.target.id)]=event.target.value;
         setData(update);
-        setImgCh(true);
     }
     const handleImage=(event)=>
     {

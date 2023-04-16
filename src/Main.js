@@ -13,6 +13,7 @@ import './main.css';
     const [dispName, setDispName] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
     const [info, setInfo]=useState();
+    const [type,setType]=useState("student");
     const navigate=useNavigate();
 
     useEffect(()=>{
@@ -48,6 +49,7 @@ import './main.css';
                                 const image=Buffer.from(res.dp).toString();
                                 console.log(image);
                                 setImg(image);
+                                setType(res.type);
                                 console.log(img);
                             }
                             if(res.type!=="admin")
@@ -115,7 +117,7 @@ import './main.css';
                 <button className="lostfound" onClick={handleLostfound}>lost/found enquiry dashboard</button>
             </div>
             <div className="lowbar">
-               <LowbarSelect sel={lowbar} info={info} pp={img}/>
+               <LowbarSelect sel={lowbar} info={info} pp={img} type={type}/>
             </div>
         </div> 
     )

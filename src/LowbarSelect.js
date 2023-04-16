@@ -2,6 +2,8 @@ import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Editdetail from "./Editdetail.js";
 import Deactivate from "./Deactivate.js";
+import Cabpool from "./cabpool.js";
+import Lostfound from "./Lostfound.js";
 
 
 function LowbarSelect(props)
@@ -17,11 +19,11 @@ function LowbarSelect(props)
     }
     else if(props.sel===2)
     {
-        return <h1>This page is to see car pool window</h1>
+        return <Cabpool id={props.info} type={props.type}/>
     }
     else if(props.sel===3)
     {
-        return <h1>This page is to see lost and found window</h1>
+        return <Lostfound id={props.info} type={props.type}/>
     }
     else if(props.sel===4)
     {
