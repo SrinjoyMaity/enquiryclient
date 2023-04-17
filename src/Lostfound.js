@@ -6,13 +6,13 @@ function Lostfound(props)
 {
     const navigate=useNavigate();
     const [window, setWindow]=useState(1);
-    const [data, setData]=useState(Array(4).fill(""));
+    const [data, setData]=useState(Array(11).fill(""));
     const [img, setImg]=useState(props.img);
     const [disp, setDisp] =useState("");
     const [imgCh, setImgCh]=useState(0);
     const [imgfile, setImgfile]=useState("");
 
-    useEffect(handlelist());
+    useEffect(()=>{handlelist()});
 
     const handleChange=(event)=>
     {
@@ -57,20 +57,28 @@ function Lostfound(props)
     }
     async function handlelist()
     {
-        fetch(`http://localhost:2000/enquiry/item`, {
+        let output={
+                begin:data[8],
+                end:data[9],
+                id:data[10]
+        }
+        console.log(output);
+        fetch(`http://localhost:2000/enquiry/getitem`, {
                 headers:
                 {
                     'Content-Type': 'application/json'
                 },
-                method: 'GET' ,
+                method: 'POST' ,
                 mode: 'cors',
                 credentials:"same-origin",
+                body:JSON.stringify(output)
                 })
                 .then(function(res){
                     if(res.status===200)
                      {   
-                        var val=res.JSON();
-                        console.log(val);
+                        res.json().then(function(data){
+                        console.log(data);
+                        });
                     }
                     else
                     {
@@ -109,7 +117,7 @@ function Lostfound(props)
             }
         
             console.log(output);
-            fetch(`http://localhost:2000/enquiry/item`, {
+            fetch(`http://localhost:2000/enquiry/additem`, {
                 headers:
                 {
                     'Content-Type': 'application/json'
@@ -156,7 +164,7 @@ function Lostfound(props)
         {
             handlelist();
             return(
-                <button className="lostsearch" id="6" onClick={handleClick}>Search</button>
+                <h1>this is display page</h1>
             )
         }
     }
@@ -172,10 +180,10 @@ function Lostfound(props)
         <div className="lostpage">
             <div className="lostbar">
                 <h4 className="begin">Begin:</h4>
-                <input className="begInp" type="date"></input>
+                <input className="begInp" id="8" type="date" onChange= {handleChange}></input>
                 <h4 className="end">End:</h4>
-                <input className="endInp" type="date"></input>
-            <input className="finditem" type="text" value="Enter id"></input>
+                <input className="endInp" id="9" type="date" onChange= {handleChange}></input>
+            <input className="finditem"  id="10" type="text" onChange= {handleChange}></input>
             <button className="lostsearch" id="6" onClick={handleClick}>Search</button>
             <button className="lostadd" id="7" onClick={handleClick}>Add item</button>
              </div>
