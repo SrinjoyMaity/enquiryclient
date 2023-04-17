@@ -11,6 +11,9 @@ function Lostfound(props)
     const [disp, setDisp] =useState("");
     const [imgCh, setImgCh]=useState(0);
     const [imgfile, setImgfile]=useState("");
+
+    useEffect(handlelist());
+
     const handleChange=(event)=>
     {
         let update= data;
@@ -52,6 +55,30 @@ function Lostfound(props)
         document.getElementById("4").value="";
         setDisp("");
     }
+    async function handlelist()
+    {
+        fetch(`http://localhost:2000/enquiry/item`, {
+                headers:
+                {
+                    'Content-Type': 'application/json'
+                },
+                method: 'GET' ,
+                mode: 'cors',
+                credentials:"same-origin",
+                })
+                .then(function(res){
+                    if(res.status===200)
+                     {   
+                        var val=res.JSON();
+                        console.log(val);
+                    }
+                    else
+                    {
+                        setDisp("Error occured in server");
+                    }
+                })
+    }
+
     async function handleUpload(e)
     {
         e.preventDefault();
@@ -82,7 +109,7 @@ function Lostfound(props)
             }
         
             console.log(output);
-            fetch(`http://localhost:2000/enquiry/additem`, {
+            fetch(`http://localhost:2000/enquiry/item`, {
                 headers:
                 {
                     'Content-Type': 'application/json'
@@ -127,8 +154,9 @@ function Lostfound(props)
         }
         else 
         {
+            handlelist();
             return(
-                <h1>view page</h1>
+                <button className="lostsearch" id="6" onClick={handleClick}>Search</button>
             )
         }
     }
