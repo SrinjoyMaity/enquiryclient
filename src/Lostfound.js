@@ -1,4 +1,5 @@
 import { useState , useEffect } from "react";
+import {Buffer} from 'buffer';
 import { useNavigate } from "react-router-dom";
 import './lostfound.css';
 
@@ -11,8 +12,11 @@ function Lostfound(props)
     const [disp, setDisp] =useState("");
     const [imgCh, setImgCh]=useState(0);
     const [imgfile, setImgfile]=useState("");
+    const [list, setList]=useState("");
+    const [det, setDetail]=useState("");
+    const [itemimg, setItemImg]=useState();
 
-    useEffect(()=>{handlelist()});
+    useEffect(()=>{handlelist()},[]);
 
     const handleChange=(event)=>
     {
@@ -73,18 +77,48 @@ function Lostfound(props)
                 credentials:"same-origin",
                 body:JSON.stringify(output)
                 })
-                .then(function(res){
+                .then((res)=>{
                     if(res.status===200)
                      {   
-                        res.json().then(function(data){
-                        console.log(data);
-                        });
-                    }
-                    else
-                    {
-                        setDisp("Error occured in server");
+                        return res.json();
                     }
                 })
+                .then((data)=>{
+                    console.log(data);
+                    setList(data);})
+    }
+    function handleInspect(event)
+    {
+        let output={
+            id: list[parseInt(event.target.id)]._id
+        }
+    console.log(output);
+    fetch(`http://localhost:2000/enquiry/getitemDetail`, {
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST' ,
+            mode: 'cors',
+            credentials:"same-origin",
+            body:JSON.stringify(output)
+            })
+            .then((res)=>{
+                if(res.status===200)
+                 {   
+                    res.json().then((data)=>{
+                        console.log(data);
+                        const image=Buffer.from(data.image).toString();
+                        setItemImg(image);
+                        setDetail([<br/>," Name: "+data.itemname,<br/>," ",<br/>," Location: "+data.location,<br/>," ",<br/>," Date: "+data.date,<br/>," ",<br/>," Description: "+data.description])
+                    }) 
+                }
+                else
+                {
+                    setDetail("Error occured in server");
+                    console.log(det);
+                }
+            })
     }
 
     async function handleUpload(e)
@@ -130,6 +164,7 @@ function Lostfound(props)
                 .then(function(res){
                     if(res.status===200)
                      {   
+                        handleCancel();
                         setDisp("update was successful");
                     }
                     else
@@ -162,18 +197,41 @@ function Lostfound(props)
         }
         else 
         {
-            handlelist();
+            if(list==="")
+            {
+                return;
+            }
             return(
-                <h1>this is display page</h1>
+                <div className="lostlookup">
+                <div className="displaylost">
+                    {
+                        list.map((element,index) => (
+                            <div className="displayitem">
+                                <h4 className="lostname">&nbsp;&nbsp;&nbsp;ID:&nbsp;{element._id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Found on:&nbsp;{element.date} &nbsp;</h4>
+                                <button className="lostinspect" id={index} onClick={handleInspect}>Inspect</button>
+                                <button className="lostdelete">delete</button>
+                            </div>
+                         ))
+                     }
+                </div>
+                <div className="imagelost">
+                    <img src={itemimg} className="foundimg" alt="found_image" />
+                    <p className="founddetails">{det}</p>
+                </div>
+                </div>
             )
         }
     }
     function handleClick(event)
     {
-        setWindow(parseInt(event.target.id)-5)
+        setWindow(parseInt(event.target.id)-5);
         if(window===2)
         {
             handleCancel()
+        }
+        else
+        {
+            handlelist()
         }
     }
     return(
