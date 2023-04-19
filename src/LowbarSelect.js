@@ -15,15 +15,15 @@ function LowbarSelect(props)
     }
     else if(props.sel===1)
     {
-        return <Editdetail info={props.info} img={props.pp}/>
+        return <Editdetail  img={props.pp}/>
     }
     else if(props.sel===2)
     {
-        return <Cabpool id={props.info} type={props.type}/>
+        return <Cabpool type={props.type}/>
     }
     else if(props.sel===3)
     {
-        return <Lostfound id={props.info} type={props.type}/>
+        return <Lostfound  type={props.type}/>
     }
     else if(props.sel===4)
     {
@@ -31,7 +31,7 @@ function LowbarSelect(props)
     }
     else if(props.sel===5)
     {
-        return <Deactivate info={props.info}/>
+        return <Deactivate/>
     }
     else
     {

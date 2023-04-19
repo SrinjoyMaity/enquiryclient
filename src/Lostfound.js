@@ -1,6 +1,7 @@
 import { useState , useEffect } from "react";
 import {Buffer} from 'buffer';
 import { useNavigate } from "react-router-dom";
+import {useCookies} from "react-cookie";
 import './lostfound.css';
 
 function Lostfound(props)
@@ -15,6 +16,7 @@ function Lostfound(props)
     const [list, setList]=useState("");
     const [det, setDetail]=useState("");
     const [itemimg, setItemImg]=useState();
+    const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
 
     useEffect(()=>{handlelist()},[]);
 
@@ -70,7 +72,8 @@ function Lostfound(props)
         fetch(`http://localhost:2000/enquiry/getitem`, {
                 headers:
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "authorization": cookies.enquiryUser
                 },
                 method: 'POST' ,
                 mode: 'cors',
@@ -81,6 +84,10 @@ function Lostfound(props)
                     if(res.status===200)
                      {   
                         return res.json();
+                    }
+                    else
+                    {
+                        return "";
                     }
                 })
                 .then((data)=>{
@@ -96,7 +103,9 @@ function Lostfound(props)
     fetch(`http://localhost:2000/enquiry/getitemDetail`, {
             headers:
             {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "authorization": cookies.enquiryUser
+                
             },
             method: 'POST' ,
             mode: 'cors',
@@ -116,6 +125,7 @@ function Lostfound(props)
                 else
                 {
                     setDetail("Error occured in server");
+                    setItemImg("");
                     console.log(det);
                 }
             })
@@ -143,7 +153,6 @@ function Lostfound(props)
        else
        {
         let output={
-            id:props.id,
             itemname: data[1],
             location: data[2],
             description: data[3],
@@ -154,7 +163,8 @@ function Lostfound(props)
             fetch(`http://localhost:2000/enquiry/additem`, {
                 headers:
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "authorization": cookies.enquiryUser
                 },
                 method: 'POST' ,
                 mode: 'cors',

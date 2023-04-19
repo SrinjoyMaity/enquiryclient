@@ -39,7 +39,6 @@ import './main.css';
                         res.json().then(function(res){
                             console.log(res);
                             setDispName(res.firstname+" "+res.lastname+" "+res.roll);
-                            setInfo(res._id);
                             if(res.dp===null)
                             {
                                 setImg(pp);
@@ -117,7 +116,7 @@ import './main.css';
                 <button className="lostfound" onClick={handleLostfound}>lost/found enquiry dashboard</button>
             </div>
             <div className="lowbar">
-               <LowbarSelect sel={lowbar} info={info} pp={img} type={type}/>
+               <LowbarSelect sel={lowbar} pp={img} type={type}/>
             </div>
         </div> 
     )

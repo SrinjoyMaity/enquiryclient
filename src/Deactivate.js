@@ -17,14 +17,14 @@ function Deactivate(props)
     function handledel(e)
     {
         let output={
-            id:props.info,
             password: pass,
         }
         console.log(output);
         fetch(`http://localhost:2000/enquiry/deleteAccount`, {
             headers:
             {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "authorization": cookies.enquiryUser
             },
             method: 'POST' ,
                 mode: 'cors',

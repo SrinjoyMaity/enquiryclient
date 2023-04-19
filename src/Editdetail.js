@@ -2,6 +2,7 @@ import { useState , useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import './Editdetail.css';
 import pp from "./images/profilepic.jpg";
+import {useCookies} from "react-cookie";
 
 
 function Editdetail(props)
@@ -12,6 +13,7 @@ function Editdetail(props)
     const [disp, setDisp] =useState("");
     const [imgCh, setImgCh]=useState(0);
     const [imgfile, setImgfile]=useState("");
+    const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
    
     const handleChange=(event)=>
     {
@@ -49,14 +51,14 @@ function Editdetail(props)
         {
         let val= imgfile;
         let output={
-            id:props.info,
             bin: val,
         };
         console.log(JSON.stringify(output));
         fetch(`http://localhost:2000/enquiry/updatepp`, {
             headers:
             {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "authorization": cookies.enquiryUser
             },
             method: 'POST' ,
                 mode: 'cors',
@@ -99,7 +101,6 @@ function Editdetail(props)
         }
        
         let output={
-            id:props.info,
             firstname: data[1],
             lastname: data[2],
             oldpassword: data[3],
@@ -110,7 +111,8 @@ function Editdetail(props)
         fetch(`http://localhost:2000/enquiry/updateAccount`, {
             headers:
             {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "authorization": cookies.enquiryUser
             },
             method: 'POST' ,
                 mode: 'cors',
