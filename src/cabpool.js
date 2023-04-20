@@ -48,19 +48,18 @@ function Cabpool(props)
        else
        {
         let output={
-            admin:props.id,
             phone:data[0],
             slots: data[11],
-            date: data[2]+" "+data[1],
+            date: data[2]+"T"+data[1],
             pickup: data[3],
             destination: data[4],
             }
-        
             console.log(output);
             fetch(`http://localhost:2000/enquiry/addride`, {
                 headers:
                 {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    "authorization": cookies.enquiryUser
                 },
                 method: 'POST' ,
                 mode: 'cors',
@@ -72,6 +71,10 @@ function Cabpool(props)
                      {   
                         handleCancel();
                         setDisp("update was successful");
+                    }
+                    else if(res.status===469)
+                    {
+                        navigate("/");
                     }
                     else
                     {
@@ -87,6 +90,8 @@ function Cabpool(props)
         reset[2]="";
         reset[3]="";
         reset[4]="";
+        reset[0]="";
+        reset[11]="";
         setData(reset);
         document.getElementById("1").value="";
         document.getElementById("2").value="";
@@ -136,7 +141,7 @@ function Cabpool(props)
                     <input className="endInp" id="9" type="date" onChange= {handleChange}></input>
                 <input className="finditem"  id="10" type="text" onChange= {handleChange}></input>
                 <button className="lostsearch" id="6" onClick={handleClick}>Search</button>
-                <button className="lostadd" id="7" onClick={handleClick}>find rides</button>
+                <button className="lostadd" id="7" onClick={handleClick}>Create ride</button>
                 <button className="myride" id="8" onClick={handleClick}>My rides</button>
                  </div>
                 <div className="lostlowbar">
