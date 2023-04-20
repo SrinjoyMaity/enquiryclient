@@ -19,6 +19,7 @@ function Lostfound(props)
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
 
     useEffect(()=>{handlelist()},[]);
+    useEffect(()=>{console.log(cookies)});
 
     const handleChange=(event)=>
     {
@@ -85,6 +86,10 @@ function Lostfound(props)
                      {   
                         return res.json();
                     }
+                    else if(res.status===469)
+                    {
+                        navigate("/");
+                    }
                     else
                     {
                         return "";
@@ -121,6 +126,10 @@ function Lostfound(props)
                         setItemImg(image);
                         setDetail([<br/>," Name: "+data.itemname,<br/>," ",<br/>," Location: "+data.location,<br/>," ",<br/>," Date: "+data.date,<br/>," ",<br/>," Description: "+data.description])
                     }) 
+                }
+                else if(res.status===469)
+                {
+                    navigate("/");
                 }
                 else
                 {
@@ -176,6 +185,10 @@ function Lostfound(props)
                      {   
                         handleCancel();
                         setDisp("update was successful");
+                    }
+                    else if(res.status===469)
+                    {
+                        navigate("/");
                     }
                     else
                     {

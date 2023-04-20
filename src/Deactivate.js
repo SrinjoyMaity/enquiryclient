@@ -41,6 +41,10 @@ function Deactivate(props)
                     removeCookie("enquiryUser");
                     navigate("/");
                 }
+                else if(res.status===469)
+                {
+                    navigate("/");
+                }
                 else
                 {
                     setDisp("something went wrong!");

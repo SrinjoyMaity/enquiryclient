@@ -71,6 +71,10 @@ function Editdetail(props)
                     setDisp("update was successful");
                     navigate("/main");
                 }
+                else if(res.status===469)
+                {
+                    navigate("/");
+                }
                 else
                 {
                     setDisp("Something went wrong while uploading the server");
@@ -120,6 +124,10 @@ function Editdetail(props)
                 body:JSON.stringify(output)
             })
             .then(function(res){
+                 if(res.status===469)
+                {
+                    navigate("/");
+                }
                 if(res.status===503)
                 {
                     setDisp("some error occured");
