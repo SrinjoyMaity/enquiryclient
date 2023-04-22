@@ -7,10 +7,50 @@ import {useCookies} from "react-cookie";
 function Cabpool(props)
 {
     const navigate=useNavigate();
-    const [data, setData]=useState(Array(12).fill(""));
+    const [data, setData]=useState(Array(20).fill(""));
     const [window, setWindow]=useState(1);
     const [disp, setDisp] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
+    const [list, setList]=useState("");
+
+    useEffect(()=>{handlelist()},[]);
+
+    async function handlelist()
+    {
+        let output={
+                begin:data[8],
+                end:data[9],
+                id:data[10]
+        }
+        console.log(output);
+        fetch(`http://localhost:2000/enquiry/getride`, {
+                headers:
+                {
+                    'Content-Type': 'application/json',
+                    "authorization": cookies.enquiryUser
+                },
+                method: 'POST' ,
+                mode: 'cors',
+                credentials:"same-origin",
+                body:JSON.stringify(output)
+                })
+                .then((res)=>{
+                    if(res.status===200)
+                     {   
+                        return res.json();
+                    }
+                    else if(res.status===469)
+                    {
+                        navigate("/");
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }).then((data)=>{
+                    console.log(data);
+                    setList(data);})
+    }
     
     const handleChange=(event)=>
     {
@@ -97,6 +137,8 @@ function Cabpool(props)
         document.getElementById("2").value="";
         document.getElementById("3").value="";
         document.getElementById("4").value="";
+        document.getElementById("0").value="";
+        document.getElementById("11").value="";
     }
     function handleClick(event)
     {
@@ -105,8 +147,9 @@ function Cabpool(props)
         {
           handleCancel();
         }
-        else
+        else if(window===1)
         {
+            handlelist(); 
         }
     }
     function handleWindow()
@@ -142,7 +185,7 @@ function Cabpool(props)
                 <input className="finditem"  id="10" type="text" onChange= {handleChange}></input>
                 <button className="lostsearch" id="6" onClick={handleClick}>Search</button>
                 <button className="lostadd" id="7" onClick={handleClick}>Create ride</button>
-                <button className="myride" id="8" onClick={handleClick}>My rides</button>
+                <button className="myride" id="12" onClick={handleClick}>My rides</button>
                  </div>
                 <div className="lostlowbar">
                     {
