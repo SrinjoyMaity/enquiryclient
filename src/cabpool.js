@@ -12,8 +12,9 @@ function Cabpool(props)
     const [disp, setDisp] =useState("");
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
     const [list, setList]=useState("");
+    const [mylist, setMylist]=useState("");
 
-    useEffect(()=>{handlelist()},[]);
+    useEffect(()=>{handlelist();handleMylist()},[]);
 
     async function handlelist()
     {
@@ -50,6 +51,43 @@ function Cabpool(props)
                 }).then((data)=>{
                     console.log(data);
                     setList(data);})
+    }
+    async function handleMylist()
+    {
+        let output={
+                begin:data[8],
+                end:data[9],
+                id:data[10]
+        }
+        console.log(output);
+        fetch(`http://localhost:2000/enquiry/getmyride`, {
+                headers:
+                {
+                    'Content-Type': 'application/json',
+                    "authorization": cookies.enquiryUser
+                },
+                method: 'POST' ,
+                mode: 'cors',
+                credentials:"same-origin",
+                body:JSON.stringify(output)
+                })
+                .then((res)=>{
+                    if(res.status===200)
+                     {   
+                        return res.json();
+                    }
+                    else if(res.status===469)
+                    {
+                        navigate("/");
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }).then((data)=>{
+                    console.log(data);
+                    setMylist(data);
+                })
     }
     
     const handleChange=(event)=>
@@ -151,6 +189,10 @@ function Cabpool(props)
         {
             handlelist(); 
         }
+        else
+        {
+            handleMylist();
+        }
     }
     function handleWindow()
     {
@@ -171,6 +213,45 @@ function Cabpool(props)
                     <button className="upload" onClick={handleUpload}>Upload</button>
                     <h1 className="editDisp">{disp}</h1>
                     </div>
+                </div>
+            )
+        }
+        else if(window===1)
+        {
+            if(list==="")
+            {
+                return;
+            }
+            return(
+                <div className="displayrides">
+                    {
+                        list.map((element,index) => (
+                            <div className="displayitem">
+                                <h4 className="lostname">&nbsp;&nbsp;&nbsp;ID:&nbsp;{element._id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time:&nbsp;{new Date(element.date).toLocaleTimeString()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;{new Date(element.date).toLocaleDateString()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickup:&nbsp;{element.pickup} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Destination:&nbsp;{element.destination}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Slots:&nbsp;{element.slots}/{element.maxslots}</h4>
+                                <button className="lostinspect" id={index}>Join</button>
+                                <button className="lostdelete">delete</button>
+                            </div>
+                         ))
+                     }
+                </div>
+            )
+        }
+        else
+        {
+            if(mylist==="")
+            {
+                return;
+            }
+            return(
+                <div className="displayrides">
+                    {
+                        mylist.map((element,index) => (
+                            <div className="displayitem">
+                                <h4 className="lostname">&nbsp;&nbsp;&nbsp;ID:&nbsp;{element._id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time:&nbsp;{new Date(element.date).toLocaleTimeString()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;{new Date(element.date).toLocaleDateString()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickup:&nbsp;{element.pickup} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Destination:&nbsp;{element.destination}</h4>
+                                <button className="lostinspect" id={index}>delete</button>
+                            </div>
+                         ))
+                     }
                 </div>
             )
         }

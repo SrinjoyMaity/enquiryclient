@@ -19,7 +19,6 @@ function Lostfound(props)
     const [cookies, setCookie,removeCookie]=useCookies(['enquiryUser']);
 
     useEffect(()=>{handlelist()},[]);
-    useEffect(()=>{console.log(cookies)});
 
     const handleChange=(event)=>
     {
